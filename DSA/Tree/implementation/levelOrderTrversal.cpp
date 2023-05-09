@@ -1,5 +1,7 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
+#include <vector>
 using namespace std;
 // node for the tree
 class node{
@@ -27,17 +29,18 @@ node* buildTree(node* root){ // by refernce pass kiya kar
     return root;
 }
 void levelOrderTraversal(node* root){
-    if(root == nullptr) return;
+    if(root == nullptr) return ;
     queue<node*> q;
     q.push(root);
-    q.push(NULL);
+    q.push(nullptr); // act as a separator
     while(!q.empty()){
         node* temp = q.front();
+        // cout << temp->data << " ";
         q.pop();
-        if(temp == NULL){
-            cout << endl;
+        if(temp==nullptr){
             if(!q.empty()){
-                q.push(NULL);
+                q.push(nullptr);
+                cout << endl;
             }
         }
         else{
@@ -46,10 +49,45 @@ void levelOrderTraversal(node* root){
                 q.push(temp->left);
             }
             if(temp->right){
-                // cout << temp->data << " ";
                 q.push(temp->right);
             }
         }
+    }
+}
+
+
+void ReverseLevelOrderTraversal(node* root){
+    if(root == nullptr) return ;
+    queue<node*> q;
+    q.push(root);
+    q.push(nullptr);
+    vector<int> vec;
+    while(!q.empty()){
+        node* temp = q.front();
+        q.pop();
+        if(temp==nullptr){
+            if(!q.empty()){
+                q.push(nullptr);
+                vec.push_back(-1);
+            }
+        }
+        else{
+            vec.push_back(temp->data);
+            if(temp->right){
+                q.push(temp->right);
+            }
+            if(temp->left){
+                q.push(temp->left);
+            }
+        }
+    }
+    reverse(vec.begin(),vec.end());
+    for(auto i : vec){
+        if(i==-1){
+            cout << endl;
+            continue;
+        }
+        cout << i << " ";
     }
 }
 int main()
@@ -57,6 +95,7 @@ int main()
     node* root=nullptr;
     // root = buildTree(root);
     root = buildTree(root);
-    levelOrderTraversal(root);
-
+    levelOrderTraversal(root); 
+    cout << endl;
+    ReverseLevelOrderTraversal(root);
 }

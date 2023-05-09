@@ -55,7 +55,7 @@ void levelOrderTraversal(node* root){
     }
 }
 
-
+// reverse level order traversal                                                              
 void ReverseLevelOrderTraversal(node* root){
     if(root == nullptr) return ;
     queue<node*> q;
@@ -90,6 +90,24 @@ void ReverseLevelOrderTraversal(node* root){
         cout << i << " ";
     }
 }
+
+
+// zig zag level order traversal
+void zigZag(node* root){
+    if(root == nullptr) return ;
+    queue<node*> q;
+    q.push(root);
+    bool flag = true;
+    // vector<int> vec;
+    while(!q.empty()){
+        node* temp = q.front();
+        q.pop();
+        
+    }
+    // for(auto i : vec){
+    //     cout << i << " ";
+    // }
+}
 int main()
 {
     node* root=nullptr;
@@ -98,4 +116,6 @@ int main()
     levelOrderTraversal(root); 
     cout << endl;
     ReverseLevelOrderTraversal(root);
+    cout << "\n\n";
+    zigZag(root);
 }

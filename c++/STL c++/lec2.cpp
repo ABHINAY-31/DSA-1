@@ -245,5 +245,8 @@ int main(){
         cout << *i <<" ";
     }
     cout << endl;
+    for(auto k : l){
+        cout << k << " ";
+    }
 
 }

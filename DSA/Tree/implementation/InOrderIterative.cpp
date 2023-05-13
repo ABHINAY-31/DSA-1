@@ -69,7 +69,26 @@ void printIterativePreOrder(node* root){
     }
 }
 
-
+void printItrInOrder(node* root){ // iterative inorder traversal -------------
+    stack<node*> st;
+    if(root == nullptr){
+        return ;
+    }
+    // st.push(root);
+    node* temp=root;
+    while(!st.empty()){
+        if(temp!=nullptr){
+            st.push(temp);
+            temp = temp->left;
+        }
+        else{
+            temp = st.top();
+            st.pop();
+            cout << temp->data << " ";
+            temp=temp->right;
+        }
+    }
+}
 
 int main(){
     node* root = nullptr;
@@ -77,4 +96,7 @@ int main(){
     print(root);
     cout << "\n\n";
     printIterativePreOrder(root);
+    cout << "\n\n";
+    printItrInOrder(root);
+
 }

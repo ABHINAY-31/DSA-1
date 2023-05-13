@@ -16,7 +16,7 @@ node* buildTree(node* root){ // by refernce pass kiya kar
     int value;
     cin >> value;
     root = new node(value);
-    if(value == -1){
+    if(value == -1){ // return situation
         return nullptr;
     }
     cout << "Enter the Value to the left: ";
@@ -59,5 +59,4 @@ int main()
     inorder(root);
     cout << endl;
     postorder(root);
-
 }

@@ -1,4 +1,5 @@
 #include <bits/stdc++.h> // have all the libraries and load them all while execution
+// also loaded the ones which not in use better to do only that library
 using namespace std;
 //--------------------------------- NAMESPACE -------------------------------------
 // now using the concept of namespace to avoid name conflict error
@@ -47,11 +48,11 @@ int main(){
     */
     array<int ,5> arr1={1,2,3,4,5};
     
-    vector<int>::iterator ptr=arr1.begin()// iterator to a vector
+    // vector<int>::iterator ptr=arr1.begin()// iterator to a vector
 
-    for(auto it=arr1.begin();it!=arr1.end();it++){ // begin end
-        cout << *it << " ";
-    }
+    // for(auto it=arr1.begin();it!=arr1.end();it++){ // begin end
+    //     cout << *it << " ";
+    // }
     cout << endl;
     for(auto i=arr1.rbegin();i!=arr1.rend();i++){// rbegin rend
         cout << *i << " ";

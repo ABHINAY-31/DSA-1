@@ -121,6 +121,13 @@ int main(){
     set<pair<int,int>>st5;
     map<pair<int,int>,int> mp4;
 
+    cout << "pair of set \n";
+    st5.insert(make_pair(1,4));
+    st5.insert(make_pair(9,3));
+    for(auto l : st5){
+        cout << l.first << " ";
+    }
+    cout << "----------------------------------------------\n\n";
     vector<pair<int,int>> vect;
     vect.push_back(make_pair(2,3));
     vect.push_back(make_pair(1,2));

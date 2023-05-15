@@ -49,11 +49,43 @@ int depthOfTree(node* root){
     }
     int l = depthOfTree(root->left);
     int r = depthOfTree(root->right);
-    
+    return max(l,r)+1;
+}
+
+bool checkBalance(node* root){ // naive approach in this time complexity is O(n^2)
+    if(root == nullptr){
+        return true;
+    }
+    int lh = depthOfTree(root->left);
+    int rh = depthOfTree(root->right);
+
+    if(abs(lh-rh) > 1) return false;
+    bool l = checkBalance(root->left);
+    bool r = checkBalance(root->right);
+    if(!l || !r) return false;
+    return true;
+}
+
+// best approach that is in O(n)
+int check(node* root){
+    if(root == nullptr){
+        return 0;
+    }
+    int lh = check(root->left);
+    int rh = check(root->right);
+    if(lh == -1 || rh == -1) return -1;
+    if(abs(lh-rh) > 1) return -1;
+    return max(lh,rh)+1;
 }
 
 int main(){
     node* root;
     root = buildlevelOrder(root);
-    cout << depthOfTree(root) << endl;
+    cout << checkBalance(root) << endl;
+    if(check(root) != -1){
+        cout << "Balanced" << endl;
+    }
+    else{
+        cout << "not Balanced" << endl;
+    } 
 }

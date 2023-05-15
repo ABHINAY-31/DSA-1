@@ -3,7 +3,7 @@
 #include <stack>
 #include <queue>
 using namespace std;
-
+// need to do 
 class node{
     public:
         int data;
@@ -15,64 +15,63 @@ class node{
             this->right = nullptr;
         }
 };
-
 node* buildTree(node* root){
     int value;
-    // cout << "Enter the root value: ";
     cin >> value;
-    root = new node(value);
     if(value == -1){
         return nullptr;
     }
-    cout << "Enter the data to the left of the Tree: ";
+    root = new node(value);
+    cout << "Enter the Value to the left: ";
     root->left = buildTree(root->left);
-    cout << "Enter the data to the right of the Tree: ";
+    cout << "Enter the value to the right: ";
     root->right = buildTree(root->right);
-    return root;
-}
+}     
 
-void printPreOrder(node* root){ // dfs preOrder
+void levelOrder(node* root){
     if(root == nullptr){
-        return ;
+        return ; 
     }
-    cout << root->data << " ";
-    printPreOrder(root->left);
-    printPreOrder(root->right);
+    queue<node*> q;
+    q.push(root);
+    q.push(nullptr);
+    while(!q.empty()){
+        node* temp = q.front();
+        q.pop();
+        if(temp == nullptr){
+            if(!q.empty()){
+                cout << endl;
+                q.push(nullptr);
+            }
+        }
+        else{
+            cout << temp->data << " ";
+            if(temp->left){
+                q.push(temp->left);
+            }
+            if(temp->right){
+                q.push(temp->right);
+            }
+        }
+    }
+    cout << endl;
 }
 
-void printInOrder(node* root){
-    if(root == nullptr){
-        return ;
-    }
-    printInOrder(root->left);
-    cout << root->data << " ";
-    printInOrder(root->right);
-}
-
-void printPostOrder(node* root){
-    if(root == nullptr){
-        return ;
-    }
-    printPostOrder(root->left);
-    printPostOrder(root->right);
-    cout << root->data << " ";
-}
-
-
-// iterative preorder
 void preOrder(node* root){
-    if(root == nullptr) return ;
+    if(root == nullptr){
+        return ;
+    }
     stack<node*> s;
     s.push(root);
     while(!s.empty()){
         node* temp = s.top();
         s.pop();
-        cout << temp->data << " ";  
+        cout << temp->data << " ";
         if(temp->right){
             s.push(temp->right);
         }
         if(temp->left){
-            s.push(temp->left); // tsack is LIFO that io ehy add right first so left will printed
+            s.push(temp->left);
         }
     }
 }
@@ -82,37 +81,80 @@ void inOrder(node* root){
         return ;
     }
     stack<node*> s;
-    // s.push(root);
-    node* temp = root;
-    while(!s.empty()){ 
+    s.push(root);
+    node* temp=s.top();
+    bool flag =true;
+    while(true){
         if(temp!=nullptr){
+            if(flag){
+                s.pop();
+                flag=false;
+            }
             s.push(temp);
-            temp = temp->left;
+            temp=temp->left;
         }
         else{
+            if(s.empty()) break;
             temp = s.top();
-            s.pop();
             cout << temp->data << " ";
-            temp = temp->right;
+            s.pop();
+            temp=temp->right;
         }
     }
-}                                                                                                                                              
+}
+
+void postOrder(node* root){ // use two pointer in case of Post Order
+    if(root == nullptr) return ;
+    stack<node*> s;
+    node *curr = root;
+    while(!s.empty() || curr!=nullptr){
+        if(curr!=nullptr){
+            s.push(curr);
+            curr = curr->left;
+        }
+        else{
+            node* temp = s.top()->right;
+            if(temp == nullptr){
+                temp = s.top();
+                cout << temp->data << " ";
+                s.pop();
+                // temp = temp->right;
+                while(temp == s.top()->right && !s.empty()){
+                    temp = s.top();
+                    cout << temp->data << " ";
+                    s.pop();
+                }
+            }
+            else{
+                curr = temp;
+            }
+        }
+    }
+}
+
 int main(){
     node* root = nullptr;
     root = buildTree(root);
-    cout << "preorder :\n";
-    printPreOrder(root);
-    cout << "\ninorder :\n";
-    cout << endl;
-    printInOrder(root);
-    cout << endl;
-    cout << "postorder :\n";
-    printPostOrder(root);
-    cout << endl;
-    // now perform the folloing traversal using iterarive approach
-
-    //iterative pre order
+    cout << "Levelorder :\n";
+    levelOrder(root);
+    cout << "PreORder\n";
     preOrder(root);
-    cout << endl;
+    cout << "\nInOrder\n";
     inOrder(root);
+    cout << "\nPostOrder\n";
+    postOrder(root);
+    // printPreOrder(root);
+    // cout << "\ninorder :\n";
+    // cout << endl;
+    // printInOrder(root);
+    // cout << endl;
+    // cout << "postorder :\n";
+    // printPostOrder(root);
+    // cout << endl;
+    // // now perform the folloing traversal using iterarive approach
+
+    // //iterative pre order
+    // preOrder(root);
+    // cout << endl;
+    // inOrder(root);
 }

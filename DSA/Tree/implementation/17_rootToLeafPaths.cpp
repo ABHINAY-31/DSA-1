@@ -11,20 +11,29 @@
  */
 
 // time complexity is O(n)
+// if need to find the specific node we can do so
+/*
+    TreeNode8 &temp
+    things we need to change
+    that is,
+    if(root == nullptr) return;
+    if(root == p) temp = root; return;
+    if(temp == p) return;
+*/
 class Solution {
 public:
-   void preorder(TreeNode* root , vector<string> &v, string str){
-       if(root == nullptr) return ;
-       if(root->left == nullptr && root->right == nullptr){
-           str+=to_string(root->val);
-           v.push_back(str);
-           return ;
-       }
-       str+=to_string(root->val);
-       str+="->";
-       preorder(root->left,v,str);
-       preorder(root->right,v,str);
-   }
+    void preorder(TreeNode* root , vector<string> &v, string str){
+        if(root == nullptr) return ;
+        if(root->left == nullptr && root->right == nullptr){
+            str+=to_string(root->val);
+            v.push_back(str);
+            return ;
+        }
+        str+=to_string(root->val);
+        str+="->";
+        preorder(root->left,v,str);
+        preorder(root->right,v,str);
+    }
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> v;
         string str;

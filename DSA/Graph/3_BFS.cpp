@@ -1,25 +1,23 @@
-#include <iostream>
-#include <vector>
-#include <list>
-using namespace std;
-
-int main(){
-    vector<int> v[6];
-    queue<int> q;
-    q.push(0);
-    for(int i = 0; i < 8 ; i++){
-        int u , v;
-        cin >> u >> v;
-        v[u].push_back(v);
-        v[v].push_back(u);
-    }
-    int visited[8]={0};
-    for(int i = 0; i < 8; i++){
-        if(visited[i] != 1){
-            visited[i] = 1;
-            for(auto i : v[i]){
-                cout << 
+class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> vec;
+        queue<int> q;
+        int vis[V] = {0};
+        vis[0] = 1;
+        q.push(0);
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            vec.push_back(node);
+            for(auto i : adj[node]){
+                if(!vis[i]){
+                    vis[i] = 1;
+                    q.push(i);
+                }
             }
-        } 
+        }
+        return vec;
     }
-}
+};

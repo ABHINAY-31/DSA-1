@@ -8,15 +8,14 @@ int main(){
     for(auto &i : vec){
         cin >> i;
     }
-    // find the minimum element and then swap it
-    for(int i = 0; i < n ; i++){
-        int min_index = i+1;
-        for(int j = i; j < n; j++){
-            if(vec[j] < vec[min_index]){
-                min_index = j;
+    for(int i = 0; i < n; i++){
+        int min = i;
+        for(int j = i+1; j < n; j++){
+            if(vec[min] > vec[j]){
+                min = j;
             }
         }
-        swap(vec[i] , vec[min_index]);
+        swap(vec[min] , vec[i]);
     }
     for(auto i : vec){
         cout << i << " ";

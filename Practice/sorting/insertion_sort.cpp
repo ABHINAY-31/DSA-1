@@ -15,14 +15,6 @@ int main(){
             vec[j+1] = vec[j];
             j--;
         }
-        // for(; j >= 0 ; j--){
-        //     if(vec[j] > key){
-        //         vec[j+1] = vec[j];
-        //     }
-        //     else{
-        //         break;
-        //     }
-        // }
         vec[j+1] = key;
     }
     for(auto i : vec){
